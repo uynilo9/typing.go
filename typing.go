@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type typer struct {
+type Typer struct {
 	Content  string
 	position uint
 }
@@ -16,7 +16,7 @@ type Option struct {
 	Delay time.Duration
 }
 
-func (t typer) Type(o Option) typer {
+func (t Typer) Type(o Option) Typer {
 	if t.position+o.Count > uint(len(t.Content)) {
 		fmt.Println("\n\u001B[31mERROR\u001B[0m The number of characters to type is out of range of the content")
 		os.Exit(1)
@@ -33,7 +33,7 @@ func (t typer) Type(o Option) typer {
 	return t
 }
 
-func (t typer) Delete(o Option) typer {
+func (t Typer) Delete(o Option) Typer {
 	if t.position-o.Count < uint(len(t.Content)) {
 		fmt.Println("\n\u001B[31mERROR\u001B[0m The number of characters to delete is out of range of the content")
 		os.Exit(1)
@@ -47,7 +47,7 @@ func (t typer) Delete(o Option) typer {
 	return t
 }
 
-func (t typer) Paste(count uint) typer {
+func (t Typer) Paste(count uint) Typer {
 	if t.position+count > uint(len(t.Content)) {
 		fmt.Println("\n\u001B[31mERROR\u001B[0m The number of characters to paste is out of range of the content")
 		os.Exit(1)
@@ -58,7 +58,7 @@ func (t typer) Paste(count uint) typer {
 	return t
 }
 
-func (t typer) Cut(count uint) typer {
+func (t Typer) Cut(count uint) Typer {
 	if t.position-count < uint(len(t.Content)) {
 		fmt.Println("\n\u001B[31mERROR\u001B[0m The number of characters to cut is out of range of the content")
 		os.Exit(1)
@@ -71,7 +71,7 @@ func (t typer) Cut(count uint) typer {
 	return t
 }
 
-func (t typer) Cursor(show bool) typer {
+func (t Typer) Cursor(show bool) Typer {
 	cursor := "\u001B[?25h"
 	if !show {
 		cursor = "\u001B[?25l"
@@ -80,11 +80,11 @@ func (t typer) Cursor(show bool) typer {
 	return t
 }
 
-func (t typer) Sleep(d time.Duration) typer {
+func (t Typer) Sleep(d time.Duration) Typer {
 	time.Sleep(time.Millisecond * d)
 	return t
 }
 
-func (t typer) Newline() {
+func (t Typer) Newline() {
 	fmt.Println()
 }
