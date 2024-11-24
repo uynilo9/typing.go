@@ -1,5 +1,5 @@
 # ⌨️ - Some simple typing effects in Go
 
-## License
+## 📜 License
 
 MIT License
